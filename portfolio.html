@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio | Charles</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- INLINE CSS -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f7fb;
+      color: #1e293b;
+      transition: 0.4s ease;
+    }
+
+    body.dark-mode {
+      background: #0f172a;
+      color: #f1f5f9;
+    }
+
+    /* HEADER */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background: #ffffff;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    body.dark-mode .header {
+      background: #1e293b;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 600;
+      color: #2563eb;
+    }
+
+    .nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: inherit;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      color: #2563eb;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .dark-toggle {
+      background: #2563eb;
+      border: none;
+      color: white;
+      padding: 8px 10px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    /* HERO */
+    .portfolio-hero {
+      text-align: center;
+      padding: 80px 20px 30px;
+    }
+
+    .portfolio-hero h1 {
+      font-size: 42px;
+      margin-bottom: 10px;
+      animation: fadeIn 1s ease;
+    }
+
+    .portfolio-hero span {
+      color: #2563eb;
+    }
+
+    .portfolio-hero p {
+      opacity: 0.8;
+      animation: fadeIn 1.5s ease;
+    }
+
+    /* GRID */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 30px;
+      padding: 40px;
+    }
+
+    .portfolio-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      transition: 0.4s ease;
+      animation: slideUp 0.8s ease;
+    }
+
+    body.dark-mode .portfolio-card {
+      background: #1e293b;
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-10px) scale(1.02);
+    }
+
+    .portfolio-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .portfolio-content {
+      padding: 20px;
+    }
+
+    .portfolio-content h3 {
+      margin-bottom: 10px;
+    }
+
+    .btn-view {
+      display: inline-block;
+      margin-top: 10px;
+      background: linear-gradient(135deg,#2563eb,#38bdf8);
+      color: white;
+      padding: 8px 18px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    .btn-view:hover {
+      transform: scale(1.05);
+    }
+
+    /* FOOTER */
+    .footer {
+      text-align: center;
+      padding: 25px;
+      font-size: 14px;
+      opacity: 0.8;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeIn {
+      from {opacity:0; transform: translateY(20px);}
+      to {opacity:1; transform: translateY(0);}
+    }
+
+    @keyframes slideUp {
+      from {opacity:0; transform: translateY(30px);}
+      to {opacity:1; transform: translateY(0);}
+    }
+
+    /* MOBILE */
+    @media(max-width:768px){
+      .nav ul {
+        position: absolute;
+        background: white;
+        top: 65px;
+        right: 0;
+        width: 220px;
+        flex-direction: column;
+        display: none;
+        padding: 20px;
+      }
+
+      body.dark-mode .nav ul {
+        background: #1e293b;
+      }
+
+      .nav ul.show {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">Charles Portfolio</div>
+
+  <div class="menu-toggle" id="menuToggle">
+    <i class="fas fa-bars"></i>
+  </div>
+
+<nav class="nav">
+  <ul id="navMenu">
+    <li><a href="index.html"><i class="fas fa-house"></i> Home</a></li>
+    <li><a href="about.html"><i class="fas fa-user"></i> About</a></li>
+    <li><a href="portfolio.html"><i class="fas fa-briefcase"></i> Portfolio</a></li>
+    <li><a href="my-work.html"><i class="fas fa-code"></i> My Work</a></li>
+    <li><a href="experience.html"><i class="fas fa-chart-line"></i> Experience</a></li>
+    <li><a href="mentors.html"><i class="fas fa-user-tie"></i> Mentors</a></li>
+    <li><a href="contacts.html"><i class="fas fa-envelope"></i> Contacts</a></li>
+  </ul>
+</nav>
+
+
+  <button class="dark-toggle" id="darkModeToggle">
+    <i class="fas fa-moon"></i>
+  </button>
+</header>
+
+<section class="portfolio-hero">
+  <h1>My <span>Portfolio</span></h1>
+  <p>A showcase of my latest projects and creative works</p>
+</section>
+
+<section class="portfolio-grid">
+
+  <div class="portfolio-card">
+    <img src="images/project1.jpg" alt="">
+    <div class="portfolio-content">
+      <h3>Business Website</h3>
+      <p>Fully responsive company website with modern UI.</p>
+      <a href="#" class="btn-view">View Project</a>
+    </div>
+  </div>
+
+  <div class="portfolio-card">
+    <img src="images/project2.jpg" alt="">
+    <div class="portfolio-content">
+      <h3>Creative Portfolio</h3>
+      <p>Sleek animated portfolio design for branding.</p>
+      <a href="#" class="btn-view">View Project</a>
+    </div>
+  </div>
+
+  <div class="portfolio-card">
+    <img src="images/project3.jpg" alt="">
+    <div class="portfolio-content">
+      <h3>Web Application</h3>
+      <p>Interactive modern dashboard UI.</p>
+      <a href="#" class="btn-view">View Project</a>
+    </div>
+  </div>
+
+</section>
+
+<footer class="footer">
+  <p>&copy; 2025 Charles@muthokah👀 All Rights Reserved.</p>
+</footer>
+
+<script>
+const toggle = document.getElementById('menuToggle');
+const nav = document.getElementById('navMenu');
+toggle.onclick = () => nav.classList.toggle('show');
+
+const darkBtn = document.getElementById('darkModeToggle');
+darkBtn.onclick = () => document.body.classList.toggle('dark-mode');
+</script> 
+
+</body>
+</html>

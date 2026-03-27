@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>My Work | Charles Portfolio</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<!-- INLINE CSS -->
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', Arial, sans-serif; }
+body { background:#f4f7fb; color:#1e293b; transition: transform 0.3s ease, background 0.3s ease; }
+body.dark-mode { background:#0f172a; color:#f1f5f9; }
+
+/* HEADER */
+.header { display:flex; justify-content:space-between; align-items:center; padding:15px 30px; background:#ffffff; box-shadow:0 10px 25px rgba(0,0,0,0.08); position:sticky; top:0; z-index:100; }
+body.dark-mode .header { background:#1e293b; }
+.logo { font-size:20px; font-weight:600; color:#2563eb; }
+.nav ul { list-style:none; display:flex; gap:20px; }
+.nav a { text-decoration:none; color:inherit; font-size:15px; transition:0.3s; }
+.nav a:hover, .nav a.active { color:#2563eb; }
+.menu-toggle { display:none; font-size:22px; cursor:pointer; }
+.dark-toggle { background:#2563eb; border:none; color:white; padding:8px 10px; border-radius:50%; cursor:pointer; }
+
+/* HERO */
+.hero { text-align:center; padding:80px 20px 30px; }
+.hero h1 { font-size:42px; margin-bottom:10px; }
+.hero span { color:#2563eb; }
+
+/* WORK GRID */
+.work-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:30px;
+  padding:40px 20px;
+  max-width:1100px;
+  margin:auto;
+}
+.work-card {
+  background:white;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 15px 35px rgba(0,0,0,0.1);
+  transition:0.4s ease;
+}
+body.dark-mode .work-card { background:#1e293b; }
+.work-card:hover { transform:translateY(-10px); }
+.work-card img { width:100%; height:200px; object-fit:cover; cursor:pointer; }
+.work-content { padding:20px; }
+
+/* SOCIAL BUTTONS */
+.social-buttons {
+  display:flex;
+  justify-content:space-between;
+  margin-top:10px;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.social-buttons button {
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  padding:8px 10px;
+  border:none;
+  border-radius:20px;
+  cursor:pointer;
+  font-size:14px;
+  transition:0.2s;
+}
+.social-buttons button:hover { opacity:0.85; }
+.like { background:#2563eb; color:white; }
+.dislike { background:#ef4444; color:white; }
+.love { background:#f43f5e; color:white; }
+.comment { background:#10b981; color:white; }
+
+/* COMMENTS */
+.comments {
+  margin-top:10px;
+  font-size:14px;
+  color:#1e293b;
+  max-height:120px;
+  overflow-y:auto;
+}
+body.dark-mode .comments { color:#f1f5f9; }
+
+/* ZOOM CONTROLS */
+.zoom-controls {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  display:flex;
+  gap:10px;
+  background:white;
+  padding:8px 12px;
+  border-radius:30px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+  z-index:999;
+}
+body.dark-mode .zoom-controls { background:#1e293b; }
+.zoom-controls button {
+  border:none;
+  background:#2563eb;
+  color:white;
+  padding:8px 12px;
+  border-radius:50%;
+  font-size:16px;
+  cursor:pointer;
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .nav ul {
+    position:absolute;
+    background:white;
+    top:65px;
+    right:0;
+    width:220px;
+    flex-direction:column;
+    display:none;
+    padding:20px;
+  }
+  body.dark-mode .nav ul { background:#1e293b; }
+  .nav ul.show { display:flex; }
+  .menu-toggle { display:block; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">Charles Portfolio</div>
+  <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
+
+  <nav class="nav">
+  <ul id="navMenu">
+    <li><a href="index.html"><i class="fas fa-house"></i> Home</a></li>
+    <li><a href="about.html"><i class="fas fa-user"></i> About</a></li>
+    <li><a href="portfolio.html"><i class="fas fa-briefcase"></i> Portfolio</a></li>
+    <li><a href="my-work.html"><i class="fas fa-code"></i> My Work</a></li>
+    <li><a href="experience.html"><i class="fas fa-chart-line"></i> Experience</a></li>
+    <li><a href="mentors.html"><i class="fas fa-user-tie"></i> Mentors</a></li>
+    <li><a href="contacts.html"><i class="fas fa-envelope"></i> Contacts</a></li>
+  </ul>
+</nav>
+
+
+  <button class="dark-toggle" id="darkModeToggle">
+    <i class="fas fa-moon"></i>
+  </button>
+</header>
+
+<section class="hero">
+  <h1>My <span>Work</span></h1>
+  <p>Interact with projects below using reactions and comments!</p>
+</section>
+
+<section class="work-grid">
+
+  <div class="work-card">
+    <img src="images/project1.jpg" onclick="openModal(this.src)">
+    <div class="work-content">
+      <h3>Business Website</h3>
+      <p>Fully responsive company website.</p>
+      <div class="social-buttons">
+        <button class="like" onclick="addReaction(this)"><i class="fas fa-thumbs-up"></i> <span>0</span></button>
+        <button class="dislike" onclick="addReaction(this)"><i class="fas fa-thumbs-down"></i> <span>0</span></button>
+        <button class="love" onclick="addReaction(this)"><i class="fas fa-heart"></i> <span>0</span></button>
+        <button class="comment" onclick="addComment(this)">Comment</button>
+      </div>
+      <div class="comments"></div>
+    </div>
+  </div>
+
+  <div class="work-card">
+    <img src="images/project2.jpg" onclick="openModal(this.src)">
+    <div class="work-content">
+      <h3>Creative Portfolio</h3>
+      <p>Modern animated portfolio.</p>
+      <div class="social-buttons">
+        <button class="like" onclick="addReaction(this)"><i class="fas fa-thumbs-up"></i> <span>0</span></button>
+        <button class="dislike" onclick="addReaction(this)"><i class="fas fa-thumbs-down"></i> <span>0</span></button>
+        <button class="love" onclick="addReaction(this)"><i class="fas fa-heart"></i> <span>0</span></button>
+        <button class="comment" onclick="addComment(this)">Comment</button>
+      </div>
+      <div class="comments"></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- IMAGE MODAL -->
+<div class="modal" id="imgModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);justify-content:center;align-items:center;z-index:999;">
+  <span onclick="closeModal()" style="position:absolute;top:20px;right:30px;font-size:30px;color:white;cursor:pointer;">&times;</span>
+  <img id="modalImg" style="max-width:90%;max-height:90%;border-radius:10px;">
+</div>
+
+<!-- ZOOM CONTROLS -->
+<div class="zoom-controls">
+  <button onclick="zoomIn()"><i class="fas fa-plus"></i></button>
+  <button onclick="zoomOut()"><i class="fas fa-minus"></i></button>
+</div>
+
+<script>
+const toggle = document.getElementById('menuToggle');
+const nav = document.getElementById('navMenu');
+toggle.onclick = () => nav.classList.toggle('show');
+
+const darkBtn = document.getElementById('darkModeToggle');
+darkBtn.onclick = () => document.body.classList.toggle('dark-mode');
+
+/* ZOOM */
+let zoomLevel = 1;
+function zoomIn(){
+  zoomLevel+=0.1;
+  document.body.style.transform=`scale(${zoomLevel})`;
+  document.body.style.transformOrigin='top center';
+}
+function zoomOut(){
+  zoomLevel-=0.1;
+  if(zoomLevel<0.5) zoomLevel=0.5;
+  document.body.style.transform=`scale(${zoomLevel})`;
+  document.body.style.transformOrigin='top center';
+}
+
+/* IMAGE MODAL */
+function openModal(src){
+  document.getElementById('imgModal').style.display='flex';
+  document.getElementById('modalImg').src=src;
+}
+function closeModal(){
+  document.getElementById('imgModal').style.display='none';
+}
+
+/* REACTIONS */
+function addReaction(btn){
+  const span = btn.querySelector('span');
+  span.textContent = parseInt(span.textContent) + 1;
+}
+
+/* COMMENTS */
+function addComment(btn){
+  const comment = prompt("Write your comment:");
+  if(comment){
+    const card = btn.closest('.work-card');
+    const commentsDiv = card.querySelector('.comments');
+    const p = document.createElement('p');
+    p.textContent = comment;
+    commentsDiv.appendChild(p);
+  }
+}
+</script>
+
+</body>
+</html>
