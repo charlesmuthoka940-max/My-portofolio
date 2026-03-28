@@ -188,6 +188,20 @@ body.dark-mode .zoom-controls { background:#1e293b; }
     </div>
   </div>
 
+  <div class="work-card">
+    <img src="project4.jpg" onclick="openModal(this.src)">
+    <div class="work-content">
+      <h3>Creative Portfolio</h3>
+      <p>Modern animated portfolio.</p>
+      <div class="social-buttons">
+        <button class="like" onclick="addReaction(this)"><i class="fas fa-thumbs-up"></i> <span>0</span></button>
+        <button class="dislike" onclick="addReaction(this)"><i class="fas fa-thumbs-down"></i> <span>0</span></button>
+        <button class="love" onclick="addReaction(this)"><i class="fas fa-heart"></i> <span>0</span></button>
+        <button class="comment" onclick="addComment(this)">Comment</button>
+      </div>
+      <div class="comments"></div>
+    </div>
+  </div>
 </section>
 
 <!-- IMAGE MODAL -->
