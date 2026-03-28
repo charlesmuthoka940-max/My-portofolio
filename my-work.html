@@ -9,7 +9,7 @@
 <!-- INLINE CSS -->
 <style>
 * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', Arial, sans-serif; }
-body { background:#f4f7fb; color:#1e293b; transition: transform 0.3s ease, background 0.3s ease; }
+body { background:#f4f7fb; color:#1e293b; transition: background 0.3s ease; }
 body.dark-mode { background:#0f172a; color:#f1f5f9; }
 
 /* HEADER */
@@ -48,66 +48,10 @@ body.dark-mode .work-card { background:#1e293b; }
 .work-card img { width:100%; height:200px; object-fit:cover; cursor:pointer; }
 .work-content { padding:20px; }
 
-/* SOCIAL BUTTONS */
-.social-buttons {
-  display:flex;
-  justify-content:space-between;
-  margin-top:10px;
-  gap:8px;
-  flex-wrap:wrap;
-}
-.social-buttons button {
-  flex:1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:5px;
-  padding:8px 10px;
-  border:none;
-  border-radius:20px;
-  cursor:pointer;
-  font-size:14px;
-  transition:0.2s;
-}
-.social-buttons button:hover { opacity:0.85; }
-.like { background:#2563eb; color:white; }
-.dislike { background:#ef4444; color:white; }
-.love { background:#f43f5e; color:white; }
-.comment { background:#10b981; color:white; }
-
-/* COMMENTS */
-.comments {
-  margin-top:10px;
-  font-size:14px;
-  color:#1e293b;
-  max-height:120px;
-  overflow-y:auto;
-}
-body.dark-mode .comments { color:#f1f5f9; }
-
-/* ZOOM CONTROLS */
-.zoom-controls {
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  display:flex;
-  gap:10px;
-  background:white;
-  padding:8px 12px;
-  border-radius:30px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.2);
-  z-index:999;
-}
-body.dark-mode .zoom-controls { background:#1e293b; }
-.zoom-controls button {
-  border:none;
-  background:#2563eb;
-  color:white;
-  padding:8px 12px;
-  border-radius:50%;
-  font-size:16px;
-  cursor:pointer;
-}
+/* IMAGE MODAL */
+.modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); justify-content:center; align-items:center; z-index:999; }
+.modal span { position:absolute; top:20px; right:30px; font-size:30px; color:white; cursor:pointer; }
+.modal img { max-width:90%; max-height:90%; border-radius:10px; }
 
 /* MOBILE */
 @media(max-width:768px){
@@ -145,7 +89,6 @@ body.dark-mode .zoom-controls { background:#1e293b; }
   </ul>
 </nav>
 
-
   <button class="dark-toggle" id="darkModeToggle">
     <i class="fas fa-moon"></i>
   </button>
@@ -153,7 +96,7 @@ body.dark-mode .zoom-controls { background:#1e293b; }
 
 <section class="hero">
   <h1>My <span>Work</span></h1>
-  <p>Interact with projects below using reactions and comments!</p>
+  <p>Click on any project image to view full size.</p>
 </section>
 
 <section class="work-grid">
@@ -163,13 +106,6 @@ body.dark-mode .zoom-controls { background:#1e293b; }
     <div class="work-content">
       <h3>Business Website</h3>
       <p>Fully responsive company website.</p>
-      <div class="social-buttons">
-        <button class="like" onclick="addReaction(this)"><i class="fas fa-thumbs-up"></i> <span>0</span></button>
-        <button class="dislike" onclick="addReaction(this)"><i class="fas fa-thumbs-down"></i> <span>0</span></button>
-        <button class="love" onclick="addReaction(this)"><i class="fas fa-heart"></i> <span>0</span></button>
-        <button class="comment" onclick="addComment(this)">Comment</button>
-      </div>
-      <div class="comments"></div>
     </div>
   </div>
 
@@ -178,91 +114,45 @@ body.dark-mode .zoom-controls { background:#1e293b; }
     <div class="work-content">
       <h3>Creative Portfolio</h3>
       <p>Modern animated portfolio.</p>
-      <div class="social-buttons">
-        <button class="like" onclick="addReaction(this)"><i class="fas fa-thumbs-up"></i> <span>0</span></button>
-        <button class="dislike" onclick="addReaction(this)"><i class="fas fa-thumbs-down"></i> <span>0</span></button>
-        <button class="love" onclick="addReaction(this)"><i class="fas fa-heart"></i> <span>0</span></button>
-        <button class="comment" onclick="addComment(this)">Comment</button>
-      </div>
-      <div class="comments"></div>
     </div>
   </div>
 
   <div class="work-card">
     <img src="project4.jpg" onclick="openModal(this.src)">
     <div class="work-content">
-      <h3>Creative Portfolio</h3>
-      <p>Modern animated portfolio.</p>
-      <div class="social-buttons">
-        <button class="like" onclick="addReaction(this)"><i class="fas fa-thumbs-up"></i> <span>0</span></button>
-        <button class="dislike" onclick="addReaction(this)"><i class="fas fa-thumbs-down"></i> <span>0</span></button>
-        <button class="love" onclick="addReaction(this)"><i class="fas fa-heart"></i> <span>0</span></button>
-        <button class="comment" onclick="addComment(this)">Comment</button>
-      </div>
-      <div class="comments"></div>
+      <h3>Hotel Management System</h3>
+      <p>Complete hotel booking and management system with room reservation, guest tracking, and billing features.</p>
     </div>
   </div>
+
 </section>
 
 <!-- IMAGE MODAL -->
-<div class="modal" id="imgModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);justify-content:center;align-items:center;z-index:999;">
-  <span onclick="closeModal()" style="position:absolute;top:20px;right:30px;font-size:30px;color:white;cursor:pointer;">&times;</span>
-  <img id="modalImg" style="max-width:90%;max-height:90%;border-radius:10px;">
-</div>
-
-<!-- ZOOM CONTROLS -->
-<div class="zoom-controls">
-  <button onclick="zoomIn()"><i class="fas fa-plus"></i></button>
-  <button onclick="zoomOut()"><i class="fas fa-minus"></i></button>
+<div class="modal" id="imgModal">
+  <span onclick="closeModal()">&times;</span>
+  <img id="modalImg">
 </div>
 
 <script>
+// Mobile menu toggle
 const toggle = document.getElementById('menuToggle');
 const nav = document.getElementById('navMenu');
-toggle.onclick = () => nav.classList.toggle('show');
+if (toggle) {
+  toggle.onclick = () => nav.classList.toggle('show');
+}
 
+// Dark mode toggle
 const darkBtn = document.getElementById('darkModeToggle');
 darkBtn.onclick = () => document.body.classList.toggle('dark-mode');
 
-/* ZOOM */
-let zoomLevel = 1;
-function zoomIn(){
-  zoomLevel+=0.1;
-  document.body.style.transform=`scale(${zoomLevel})`;
-  document.body.style.transformOrigin='top center';
-}
-function zoomOut(){
-  zoomLevel-=0.1;
-  if(zoomLevel<0.5) zoomLevel=0.5;
-  document.body.style.transform=`scale(${zoomLevel})`;
-  document.body.style.transformOrigin='top center';
+// Image modal functions
+function openModal(src) {
+  document.getElementById('imgModal').style.display = 'flex';
+  document.getElementById('modalImg').src = src;
 }
 
-/* IMAGE MODAL */
-function openModal(src){
-  document.getElementById('imgModal').style.display='flex';
-  document.getElementById('modalImg').src=src;
-}
-function closeModal(){
-  document.getElementById('imgModal').style.display='none';
-}
-
-/* REACTIONS */
-function addReaction(btn){
-  const span = btn.querySelector('span');
-  span.textContent = parseInt(span.textContent) + 1;
-}
-
-/* COMMENTS */
-function addComment(btn){
-  const comment = prompt("Write your comment:");
-  if(comment){
-    const card = btn.closest('.work-card');
-    const commentsDiv = card.querySelector('.comments');
-    const p = document.createElement('p');
-    p.textContent = comment;
-    commentsDiv.appendChild(p);
-  }
+function closeModal() {
+  document.getElementById('imgModal').style.display = 'none';
 }
 </script>
 
